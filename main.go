@@ -47,9 +47,6 @@ func main() {
 		return
 	}
 
-	// Удаляем кавычки из введенной строки
-	//input = input[1 : len(input)-1]
-
 	data := strings.Fields(input)
 
 	//for i, word := range data {
@@ -61,6 +58,9 @@ func main() {
 		return
 	}
 
+	// Удаляем кавычки из введенной строки
+	input = input[1 : len(input)-1]
+
 	// Преобразование чисел и оператора
 	//num, err := strconv.Atoi(data[2])
 	//if err != nil || num < 1 || num > 10 {
@@ -68,9 +68,12 @@ func main() {
 	//	return
 	//}
 
-	operator := data[1]
+	//num1 = num1[1 : len(num1)-1]
+	//num2 = num2[1:len(num2)]
+
+	operator := strings.TrimPrefix(data[1], "")
 	a := data[0]
-	b := data[2]
+	b := strings.TrimSuffix(data[2], "")
 
 	var result string
 
