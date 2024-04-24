@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/AltTestKataCalc.iml" filepath="$PROJECT_DIR$/.idea/AltTestKataCalc.iml" />
+      <module fileurl="file://$USER_HOME$/KataTestCalc/.idea/KataTestCalc.iml" filepath="$USER_HOME$/KataTestCalc/.idea/KataTestCalc.iml" />
     </modules>
   </component>
 </project>
