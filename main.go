@@ -8,32 +8,6 @@ import (
 	"strings"
 )
 
-func sumStrings(a, b string) string {
-	return a + b
-}
-
-func subtractStrings(a, b string) string {
-	return strings.Replace(a, b, "", 1)
-}
-
-func multiplyStringByNumber(a string, b int) string {
-	result := ""
-	for i := 0; i < b; i++ {
-		result += a
-	}
-	return result
-}
-
-func divideStringByNumber(a string, b int) string {
-	return a[:len(a)/b]
-}
-
-//func isStringWithQuotes(a string) bool {
-//	if !strings.HasPrefix(data[0], "") && !strings.HasSuffix(data[0], ""){
-//	fmt.Println("Выделите двойными кавычками строковые значения")
-//	return
-//}
-
 func main() {
 	fmt.Print("Калькулятор умеет выполнять операции сложения строк, \n" +
 		"вычитания строки из строки, умножения строки на число \n" +
@@ -45,40 +19,30 @@ func main() {
 
 	input, _ := reader.ReadString('\n')
 
-	//input = strings.TrimSuffix(input, "\n")
-
-	//Проверяем, что строка начинается и заканчивается на одинарные кавычки
-	//if !strings.HasPrefix(input, "\"") && !strings.HasSuffix(input, "\"") {
-	//	fmt.Println("Выделите двойными кавычками строковые значения")
-	//	return
-	//}
-
 	data := strings.Fields(input)
 
-	if len(data) != 3 {
-		fmt.Println("Некорректный формат ввода")
+	_, err := strconv.Atoi(data[0])
+	if err == nil {
+		panic("Первое слогаемое должно быть строкой")
+	}
+
+	//Проверяем, что строка начинается и заканчивается на одинарные кавычки
+	if !strings.HasPrefix(input, "\"") && !strings.HasSuffix(input, "\"") {
+		fmt.Println("Выделите двойными кавычками строковые значения")
 		return
 	}
 
-	// Удаляем кавычки из введенной строки.
-	//input = input[1 : len(input)-1]
-
-	// Преобразование чисел и оператора
-	//num, err := strconv.Atoi(data[2])
-	//if err != nil || num < 1 || num > 10 {
-	//	fmt.Println("Пожалуйста, введите число от 1 до 10")
-	//	return
-	//}
-
-	//operator := data[1]
-	//a := strings.(data[0], "")
-	//b := strings.TrimSuffix(data[2], "")
+	num, err := strconv.Atoi(data[2])
+	if err != nil || num < 1 || num > 10 {
+		fmt.Println("Пожалуйста, введите число от 1 до 10")
+		return
+	}
 
 	operator := data[1]
 	a := data[0]
 	b := data[2]
 
-	if !strings.Contains(a, "") && !strings.Contains(b, "") {
+	if strings.Contains(a, "") && strings.Contains(b, "") {
 		a = strings.ReplaceAll(a, "\"", "")
 		b = strings.ReplaceAll(b, "\"", "")
 
@@ -103,5 +67,33 @@ func main() {
 		fmt.Println("Некорректный ввод математической операции")
 		return
 	}
-	fmt.Println("Результат:", result)
+
+	const maxLength = 40
+	if len(result) > maxLength {
+		cutResult := result[:maxLength] + "..."
+		fmt.Println(cutResult)
+	} else {
+		fmt.Println("Результат:", result)
+	}
+
+}
+
+func sumStrings(a, b string) string {
+	return a + b
+}
+
+func subtractStrings(a, b string) string {
+	return strings.Replace(a, b, "", 1)
+}
+
+func multiplyStringByNumber(a string, b int) string {
+	result := ""
+	for i := 0; i < b; i++ {
+		result += a
+	}
+	return result
+}
+
+func divideStringByNumber(a string, b int) string {
+	return a[:len(a)/b]
 }
