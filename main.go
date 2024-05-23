@@ -18,7 +18,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	input, _ := reader.ReadString('\n')
-
+	input = strings.TrimSpace(input)
 	data := strings.Fields(input)
 
 	_, err := strconv.Atoi(data[0])
@@ -33,7 +33,7 @@ func main() {
 	}
 
 	num, err := strconv.Atoi(data[2])
-	if err != nil || num < 1 || num > 10 {
+	if err == nil && num < 1 || num > 10 {
 		fmt.Println("Пожалуйста, введите число от 1 до 10")
 		return
 	}
